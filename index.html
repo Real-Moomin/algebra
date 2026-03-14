@@ -7,7 +7,12 @@
   <link rel="stylesheet" href="styles.css" />
   <script>
     window.MathJax = {
-      tex: { inlineMath: [['\\(','\\)'], ['$', '$']], displayMath: [['\\[','\\]']] },
+      tex: {
+        inlineMath: [["\\(","\\)"], ["$","$"]],
+        displayMath: [["\\[","\\]"], ["$$","$$"]],
+        processEscapes: true,
+        packages: {'[+]': ['ams']}
+      },
       svg: { fontCache: 'global' }
     };
   </script>
@@ -103,6 +108,13 @@
               <p>구조를 보존하는 함수</p>
             </div>
           </a>
+                  <a class="lesson-link current" href="chapter6-quotient-groups.html">
+            <span class="lesson-number">6강</span>
+            <div>
+              <strong>몫군</strong>
+              <p>여러 원소를 같은 것으로 묶어 새 군 만들기</p>
+            </div>
+          </a>
         </div>
       </aside>
     </main>
@@ -122,7 +134,7 @@
       </div>
       <div class="cta-wrap" style="margin-top:12px; gap:12px;">
         <a class="ghost-btn" href="chapter1-group-definition.html">1강 보기</a>
-        <a class="primary-btn" href="chapter5-group-homomorphisms.html">5강 시작하기</a>
+        <a class="primary-btn" href="chapter6-quotient-groups.html">6강 시작하기</a>
       </div>
     </section>
   </div>

@@ -7,7 +7,12 @@
   <link rel="stylesheet" href="styles.css" />
   <script>
     window.MathJax = {
-      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], packages: {'[+]': ['ams']} },
+      tex: {
+        inlineMath: [["\\(","\\)"], ["$","$"]],
+        displayMath: [["\\[","\\]"], ["$$","$$"]],
+        processEscapes: true,
+        packages: {'[+]': ['ams']}
+      },
       svg: { fontCache: 'global' }
     };
   </script>
