@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1강. 군의 정의</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], packages: {'[+]': ['ams']} },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="site-shell lesson-shell">
+    <nav class="top-nav">
+      <a href="index.html">← 홈으로</a>
+      <span>1단계 · 군론</span>
+    </nav>
+
+    <header class="lesson-hero">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>군의 정의</h1>
+      <p class="hero-text">
+        현대대수학의 첫 출발점. 군은 어떤 대상들의 집합과, 그 대상들을 합치는 하나의 규칙이 있을 때 생기는 구조입니다.
+        처음에는 추상적으로 보이지만, 버튼 조작, 회전, 함수 합성, 이미지 편집 명령처럼 익숙한 행동으로 생각하면 훨씬 쉬워집니다.
+      </p>
+    </header>
+
+    <main class="lesson-main">
+      <section class="card accent-card">
+        <h2>학습 목표</h2>
+        <ul class="clean-list">
+          <li>군이 무엇인지 한 문장으로 설명할 수 있다.</li>
+          <li>닫힘성, 결합법칙, 항등원, 역원의 뜻을 이해할 수 있다.</li>
+          <li>간단한 예시가 군인지 아닌지 판단할 수 있다.</li>
+          <li>기호 \(\in\), \(\ast\), \(e\), \(a^{-1}\)를 자연스럽게 읽을 수 있다.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>들어가기 전에...</h2>
+        <p>
+          게임 캐릭터에게 “왼쪽으로 90도 회전”, “오른쪽으로 90도 회전”, “가만히 있기” 같은 명령을 내릴 수도 있고, 포토샵에서 “90도 회전”, “좌우 반전”, “원본으로 되돌리기” 같은 편집 명령을 내릴 수도 있습니다.
+          중요한 것은 명령 하나하나보다, <strong>명령을 이어서 실행했을 때 규칙이 얼마나 안정적으로 유지되는가</strong>입니다.
+        </p>
+        <p>
+          두 명령을 연달아 해도 결과가 다시 허용된 상태 안에 있고, 세 명령을 묶는 방식이 달라도 최종 결과가 같고,
+          아무 변화도 주지 않는 기본 명령이 있고, 각 명령을 되돌리는 반대 명령도 있다면,
+          이런 시스템은 군과 아주 닮아 있습니다.
+        </p>
+        <div class="callout info">
+          <strong>핵심 감각:</strong> 군은 “잘 정리된 조작 시스템”입니다. 그래서 게임 조작, 회전, 이미지 편집 같은 예시와 아주 잘 어울립니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>1. 군이란 무엇일까?</h2>
+        <p>
+          군(group)은 크게 두 가지 재료, 즉 집합 \(G\)와 연산 \(\ast\)로 이루어집니다.
+        </p>
+        <ol class="number-list">
+          <li>원소들의 모임 \(G\)</li>
+          <li>원소 둘을 합치는 연산 \(\ast\)</li>
+        </ol>
+        <p>
+          여기서 연산은 꼭 덧셈이나 곱셈만 뜻하지 않습니다. 함수 두 개를 이어서 적용하는 것,
+          행렬 두 개를 곱하는 것, 도형을 회전한 뒤 다시 반사하는 것처럼 “행동을 이어 붙이는 규칙”이면 됩니다.
+        </p>
+        <p>
+          그런데 아무 집합과 아무 연산이 군이 되는 것은 아닙니다. 아래 네 가지 조건을 모두 만족해야 합니다.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>2. 먼저 기호를 읽어보자</h2>
+        <div class="symbol-grid">
+          <div class="symbol-card">
+            <span class="math-chip">\(a \in G\)</span>
+            <p><strong>\(a\)는 \(G\)에 속한다</strong>는 뜻입니다. 즉 \(a\)가 집합 \(G\)의 원소라는 말입니다.</p>
+          </div>
+          <div class="symbol-card">
+            <span class="math-chip">\(a \ast b\)</span>
+            <p><strong>\(a\)와 \(b\)를 연산한다</strong>는 뜻입니다. 여기서 \(\ast\)는 일반적인 연산 기호입니다.</p>
+          </div>
+          <div class="symbol-card">
+            <span class="math-chip">\(e\)</span>
+            <p><strong>항등원</strong>을 나타낼 때 자주 쓰는 문자입니다. 아무 변화도 일으키지 않는 특별한 원소입니다.</p>
+          </div>
+          <div class="symbol-card">
+            <span class="math-chip">\(a^{-1}\)</span>
+            <p><strong>\(a\)의 역원</strong>입니다. \(a\)를 정확히 되돌리는 반대 원소라는 뜻입니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3. 군의 네 가지 조건</h2>
+
+        <article class="mini-section">
+          <h3>① 닫힘성 (Closure)</h3>
+          <p>
+            \(G\) 안의 두 원소를 연산했을 때, 결과가 다시 \(G\) 안에 있어야 합니다.
+          </p>
+          <div class="math-box">
+            \[
+            \forall a,b \in G,\quad a \ast b \in G
+            \]
+          </div>
+          <p>
+            쉽게 말해 <strong>연산 결과가 밖으로 튀어나가면 안 된다</strong>는 뜻입니다. 디자인 툴로 비유하면, 허용된 편집 명령을 여러 번 적용해도 결과가 계속 “편집 가능한 상태” 안에 남아 있어야 합니다.
+          </p>
+          <div class="example-box">
+            <strong>예시:</strong> 정수끼리 더하면 항상 정수입니다. 예를 들어 \(3+5=8\), \(-2+7=5\)입니다.
+            결과가 여전히 정수이므로 닫혀 있습니다.
+          </div>
+        </article>
+
+        <article class="mini-section">
+          <h3>② 결합법칙 (Associativity)</h3>
+          <p>
+            셋을 연산할 때 괄호를 어디에 치든 결과가 같아야 합니다.
+          </p>
+          <div class="math-box">
+            \[
+            (a \ast b) \ast c = a \ast (b \ast c)
+            \]
+          </div>
+          <p>
+            여기서 중요한 것은 <strong>순서를 바꾸는 것</strong>이 아니라, <strong>묶는 방식만 바꾸는 것</strong>입니다.
+          </p>
+          <div class="callout warn">
+            <strong>주의:</strong> 결합법칙은 \(a \ast b = b \ast a\) 같은 식과 다릅니다.
+            그것은 교환법칙이고, 군에서는 꼭 필요하지 않습니다.
+          </div>
+        </article>
+
+        <article class="mini-section">
+          <h3>③ 항등원 (Identity)</h3>
+          <p>
+            아무 변화도 주지 않는 특별한 원소가 하나 있어야 합니다.
+          </p>
+          <div class="math-box">
+            \[
+            \exists e \in G \text{ such that } \forall a \in G,\quad e \ast a = a \ast e = a
+            \]
+          </div>
+          <p>
+            게임으로 말하면 “턴을 그냥 넘기기”, 이미지 편집으로 말하면 “아무 변경도 하지 않기”, 계산으로 말하면 “원래 값을 그대로 두기”와 비슷합니다.
+          </p>
+          <div class="example-box">
+            <strong>예시:</strong> 정수의 덧셈에서는 \(0\)이 항등원입니다. 왜냐하면 \(a+0=0+a=a\)이기 때문입니다.
+          </div>
+        </article>
+
+        <article class="mini-section">
+          <h3>④ 역원 (Inverse)</h3>
+          <p>
+            각 원소마다 그것을 정확히 되돌리는 반대 원소가 있어야 합니다.
+          </p>
+          <div class="math-box">
+            \[
+            \forall a \in G,\quad \exists a^{-1} \in G \text{ such that } a \ast a^{-1} = a^{-1} \ast a = e
+            \]
+          </div>
+          <p>
+            앞으로 한 칸 가는 명령의 반대는 뒤로 한 칸 가는 명령이고, 이미지를 시계 방향으로 \(90^\circ\) 돌렸다면 반시계 방향으로 \(90^\circ\) 돌리는 것이 반대 명령입니다. 이런 식으로 원래 상태로 돌아오게 만드는 것이 역원입니다.
+          </p>
+          <div class="example-box">
+            <strong>예시:</strong> 정수의 덧셈에서 \(5\)의 역원은 \(-5\)입니다. 실제로 \(5+(-5)=0\)입니다.
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>4. 한 번에 정리하면</h2>
+        <p>
+          어떤 집합 \(G\)와 연산 \(\ast\)가 있을 때, 아래 네 가지를 모두 만족하면 \((G,\ast)\)를 군이라고 합니다.
+        </p>
+        <div class="math-box">
+          \[
+          (G,\ast) \text{ is a group }
+          \iff
+          \begin{cases}
+          \forall a,b \in G,\ a \ast b \in G \\
+          \forall a,b,c \in G,\ (a \ast b) \ast c = a \ast (b \ast c) \\
+          \exists e \in G,\ \forall a \in G,\ e \ast a = a \ast e = a \\
+          \forall a \in G,\ \exists a^{-1} \in G,\ a \ast a^{-1} = a^{-1} \ast a = e
+          \end{cases}
+          \]
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>5. 왜 이런 조건이 중요할까?</h2>
+        <p>
+          이 네 조건이 있으면 조작을 안전하게 계속 이어 나갈 수 있습니다.
+          결과가 집합 밖으로 나가지 않고, 계산 순서를 안정적으로 다룰 수 있고,
+          기준점 \(e\)가 있고, 각 원소마다 되돌리기용 원소 \(a^{-1}\)도 있으므로 구조가 튼튼해집니다.
+        </p>
+        <p>
+          그래서 군은 대칭, 퍼즐, 암호, 방정식, 물리학의 변환뿐 아니라 게임 조작, UI 상태 전환, 이미지 회전 같은 디지털 작업에도 자연스럽게 등장합니다.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>6. 예시로 감각 익히기</h2>
+
+        <article class="mini-section">
+          <h3>예시 A. 정수와 덧셈</h3>
+          <p>
+            집합을 정수 전체 \(\mathbb{Z}\), 연산을 덧셈 \(+\)로 두면 군이 됩니다.
+          </p>
+          <ul class="clean-list">
+            <li>정수 + 정수 = 정수 → 닫힘성</li>
+            <li>\((a+b)+c=a+(b+c)\) → 결합법칙</li>
+            <li>항등원은 \(0\)</li>
+            <li>\(a\)의 역원은 \(-a\)</li>
+          </ul>
+        </article>
+
+        <article class="mini-section">
+          <h3>예시 B. 이미지 회전 명령</h3>
+          <p>
+            정사각형 이미지를 편집한다고 합시다. 가능한 명령을
+            \(G=\{0^\circ,90^\circ,180^\circ,270^\circ\}\) 회전으로 두고,
+            연산 \(st\)는 “명령을 차례로 적용하기”라고 정합니다.
+          </p>
+          <ul class="clean-list">
+            <li>\(90^\circ\) 회전 후 \(180^\circ\) 회전 = 결국 \(270^\circ\) 회전 → 닫힘성</li>
+            <li>회전 명령은 묶는 방식과 상관없이 최종 각도가 같다 → 결합법칙</li>
+            <li>\(0^\circ\) 회전은 아무 변화도 주지 않는다 → 항등원</li>
+            <li>\(90^\circ\)의 역원은 \(270^\circ\) → 역원</li>
+          </ul>
+          <div class="example-box">
+            <strong>디자인 연결:</strong> 포토샵이나 피그마에서 이미지 회전 명령을 여러 번 적용하는 상황을 떠올리면,
+            군이 “명령의 구조”를 다룬다는 느낌이 잘 잡힙니다.
+          </div>
+        </article>
+
+        <article class="mini-section">
+          <h3>예시 C. 함수 합성</h3>
+          <p>
+            고등학교 수준 예시로 함수 \(f(x)=x+1\), \(g(x)=x-1\)를 생각해 봅시다.
+            연산을 함수 합성 \(\circ\)로 보면, \(f\circ g\)와 \(g\circ f\)는 모두 항등함수 \(x\mapsto x\)가 됩니다.
+          </p>
+          <p>
+            여기서 항등함수는 항등원 역할을 하고, \(f\)와 \(g\)는 서로의 역원입니다.
+            이 예시는 나중에 군 준동형과 군의 작용을 배울 때도 계속 중요합니다.
+          </p>
+        </article>
+
+        <article class="mini-section">
+          <h3>예시 D. 게임 방향 전환</h3>
+          <p>
+            게임 캐릭터가 북쪽을 보고 있을 때, 가능한 명령을 “오른쪽으로 \(90^\circ\) 돌기”의 반복으로 생각할 수 있습니다.
+            네 번 돌리면 다시 원래 방향으로 돌아오고, 각 명령은 되돌리기가 가능합니다.
+          </p>
+          <p>
+            이런 식으로 군은 게임 입력 체계에도 자연스럽게 숨어 있습니다.
+          </p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>7. 군이 아닌 예도 꼭 보자</h2>
+
+        <article class="mini-section">
+          <h3>예시 A. 양의 정수와 뺄셈</h3>
+          <p>
+            양의 정수 집합에 뺄셈을 두면 군이 아닙니다. 예를 들어 \(3-5=-2\)인데, \(-2\)는 양의 정수 집합 밖입니다.
+            그래서 닫힘성이 깨집니다.
+          </p>
+          <div class="math-box">
+            \[
+            (7-3)-2=2, \qquad 7-(3-2)=6
+            \]
+          </div>
+          <p>
+            즉 결합법칙도 성립하지 않습니다.
+          </p>
+        </article>
+
+        <article class="mini-section">
+          <h3>예시 B. RGB 색값의 단순 덧셈</h3>
+          <p>
+            디자인에서 자주 보는 RGB 색값을 \((R,G,B)\)라 하고, 각 값은 \(0\)부터 \(255\) 사이에 있다고 합시다.
+            이제 연산을 “색 두 개를 성분별로 그냥 더하기”라고 두면,
+            결과가 이 범위를 넘어갈 수 있습니다.
+          </p>
+          <div class="example-box bad">
+            예를 들어
+            \((200,120,100)+(100,200,180)=(300,320,280)\)이 되어 허용 범위를 벗어납니다.
+            그러므로 닫힘성이 깨질 수 있어 군의 좋은 예가 아닙니다.
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>8. 연습문제</h2>
+        <p>
+          이번 문제는 <strong>수학 중심 3문제 + 심화 수학 1문제 + 실생활 응용 1문제</strong>로 구성되어 있습니다.
+        </p>
+
+        <div class="exercise">
+          <h3>문제 1. 기호 읽기</h3>
+          <p>
+            기호 \(a \in G\), \(a \ast b\), \(e\), \(a^{-1}\)를 각각 말로 설명하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              \(a \in G\)는 “\(a\)가 집합 \(G\)의 원소이다”라는 뜻입니다. \(a \ast b\)는 \(a\)와 \(b\)를 주어진 연산으로 합친다는 뜻입니다.
+              \(e\)는 항등원, \(a^{-1}\)는 \(a\)의 역원입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 2. 군의 조건 확인</h3>
+          <p>
+            집합을 \(\mathbb{Z}\), 연산을 덧셈 \(+\)으로 둘 때, 다음 네 가지를 각각 쓰세요.
+          </p>
+          <ul class="clean-list">
+            <li>닫힘성이 왜 성립하는가?</li>
+            <li>항등원은 무엇인가?</li>
+            <li>원소 \(7\)의 역원은 무엇인가?</li>
+            <li>결합법칙은 어떤 식으로 쓰는가?</li>
+          </ul>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              정수끼리 더하면 항상 정수이므로 닫힘성이 성립합니다. 항등원은 \(0\)입니다. \(7\)의 역원은 \(-7\)입니다.
+              결합법칙은 \((a+b)+c=a+(b+c)\)로 씁니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 3. 군이 아닌 이유 찾기</h3>
+          <p>
+            양의 정수 전체 \(\{1,2,3,\dots\}\)에 연산 \(-\)를 두었을 때, 왜 군이 아닌지 두 가지 이유를 쓰세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              첫째, 닫힘성이 깨집니다. 예를 들어 \(3-5=-2\)인데 \(-2\)는 양의 정수가 아닙니다.
+              둘째, 결합법칙도 성립하지 않습니다. 예를 들어 \((7-3)-2=2\)이지만 \(7-(3-2)=6\)입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise advanced">
+          <h3>문제 4. 심화 수학</h3>
+          <p>
+            집합 \(G=\{0^\circ,90^\circ,180^\circ,270^\circ\}\)를 생각하고, 연산은 “회전을 차례로 적용한 뒤 최종 각도를 \(360^\circ\)로 나눈 나머지로 보기”라고 합시다.
+            이 구조가 군이 되는 이유를 네 조건에 맞추어 간단히 설명하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              두 회전을 합치면 결과는 다시 \(0^\circ,90^\circ,180^\circ,270^\circ\) 중 하나이므로 닫힘성이 성립합니다.
+              회전의 연속 적용은 묶는 방식과 상관없이 최종 각도가 같으므로 결합법칙이 성립합니다.
+              \(0^\circ\)가 항등원입니다.
+              역원은 \(0^\circ\)의 역원이 \(0^\circ\), \(90^\circ\)의 역원이 \(270^\circ\), \(180^\circ\)의 역원이 \(180^\circ\)입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise application">
+          <h3>문제 5. 실생활 응용</h3>
+          <p>
+            디자인 툴이나 게임에서 사용하는 조작 하나를 골라, 그것이 군처럼 보이는지 판단해 보세요.
+            예를 들면 이미지 회전, 오브젝트 뒤집기, 캐릭터 방향 전환, 애니메이션 상태 전환 같은 것이 가능합니다.
+            아래 네 가지를 짧게 서술하세요.
+          </p>
+          <ul class="clean-list">
+            <li>원소는 무엇인가?</li>
+            <li>연산은 무엇인가?</li>
+            <li>항등원은 있는가?</li>
+            <li>역원은 항상 존재하는가?</li>
+          </ul>
+          <details>
+            <summary>예시 해설 보기</summary>
+            <p>
+              예를 들어 정사각형 이미지의 회전 명령만 모으면 군처럼 볼 수 있습니다.
+              원소는 \(0^\circ,90^\circ,180^\circ,270^\circ\) 회전이고, 연산은 명령을 차례로 적용하는 것입니다.
+              항등원은 \(0^\circ\) 회전이며, 각 회전에는 되돌리는 회전이 있으므로 역원도 존재합니다.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="card accent-card">
+        <h2>오늘의 핵심 한 줄</h2>
+        <p class="big-quote">
+          군은 <strong>되돌릴 수 있고, 안정적으로 이어 붙일 수 있는 조작의 구조</strong>입니다. 게임 입력, 회전, 이미지 편집 명령을 떠올리면 더 잘 보입니다.
+        </p>
+      </section>
+
+      <section class="card next-card">
+        <h2>다음 강의</h2>
+        <p>
+          다음 2강에서는 군의 정의를 실제 예시 속에 넣어 봅니다.
+          정수의 덧셈군, 행렬군, 대칭군을 보면서 군이 추상적인 말이 아니라는 것을 확인하게 됩니다.
+        </p>
+        <div class="cta-wrap left">
+          <a class="primary-btn" href="chapter2-basic-examples.html">2강으로 가기</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

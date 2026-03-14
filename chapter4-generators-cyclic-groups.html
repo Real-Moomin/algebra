@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4강. 생성원과 순환군</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], packages: {'[+]': ['ams']} },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="site-shell lesson-shell">
+    <nav class="top-nav">
+      <a href="index.html">← 홈으로</a>
+      <span>1단계 · 군론</span>
+    </nav>
+
+    <header class="lesson-hero">
+      <p class="eyebrow">Lesson 4</p>
+      <h1>생성원과 순환군</h1>
+      <p class="hero-text">
+        어떤 군은 <strong>원소 하나</strong>만 반복해서 써도 전체를 모두 만들어 낼 수 있습니다.
+        이런 관점을 알면 군을 훨씬 간단하게 볼 수 있습니다. 이번 강의에서는 <strong>생성원</strong>과 <strong>순환군</strong>을 배우고,
+        “하나의 씨앗으로 전체 구조가 만들어진다”는 감각을 익힙니다.
+      </p>
+    </header>
+
+    <main class="lesson-main">
+      <section class="card accent-card">
+        <h2>학습 목표</h2>
+        <ul class="clean-list">
+          <li>생성원(generator)의 뜻을 설명할 수 있다.</li>
+          <li>순환군(cyclic group)의 정의를 말할 수 있다.</li>
+          <li>
+            \(\langle a \rangle\) 표기가 무엇을 뜻하는지 이해할 수 있다.
+          </li>
+          <li>정수군, 나머지군, 회전군에서 생성원을 찾을 수 있다.</li>
+          <li>어떤 군이 순환군인지 아닌지 기본적으로 판별할 수 있다.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>들어가기 전에...</h2>
+        <p>
+          게임에서 “오른쪽으로 90도 돌기” 버튼이 하나 있다고 해 봅시다.
+          이 버튼을 한 번 누르면 동쪽, 두 번 누르면 남쪽, 세 번 누르면 서쪽, 네 번 누르면 다시 원래 방향으로 돌아옵니다.
+        </p>
+        <p>
+          즉, 버튼은 하나뿐인데 그 버튼을 <strong>반복</strong>하는 것만으로 가능한 모든 방향을 다 만들었습니다.
+          수학에서 이런 상황을 아주 중요하게 봅니다. 어떤 원소 하나를 반복해 전체를 만들 수 있으면,
+          그 군은 꽤 단순하고 아름다운 구조를 가졌다고 볼 수 있습니다.
+        </p>
+        <div class="callout info">
+          <strong>핵심 감각:</strong> 생성원은 “전체 구조를 키워 내는 씨앗”입니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>1. 생성원이란?</h2>
+        <p>
+          군 \((G,\ast)\)의 원소 \(a\in G\)를 계속 합성해서 얻을 수 있는 원소들의 집합을 \(a\)가 <strong>생성한다</strong>고 말합니다.
+        </p>
+        <div class="math-box">
+          \[
+          \langle a \rangle = \{\dots, a^{-2}, a^{-1}, e, a, a^2, a^3, \dots\}
+          \]
+        </div>
+        <p>
+          여기서 \(a^2\)는 \(a\ast a\), \(a^3\)는 \(a\ast a\ast a\)를 뜻합니다.
+          또 \(a^{-1}\)는 역원이고, \(a^{-2}\)는 \(a^{-1}\ast a^{-1}\)입니다.
+        </p>
+        <div class="callout warn">
+          연산이 덧셈이면 \(a^2\) 같은 표기 대신 \(2a,3a,-a\)처럼 생각하는 편이 자연스럽습니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. 순환군이란?</h2>
+        <p>
+          군 \(G\)의 어떤 원소 \(a\)에 대해
+        </p>
+        <div class="math-box">
+          \[
+          G = \langle a \rangle
+          \]
+        </div>
+        <p>
+          가 되면, 즉 원소 하나가 군 전체를 만들어 내면 \(G\)를 <strong>순환군</strong>이라고 합니다.
+        </p>
+        <p>
+          다시 말해 순환군은 “원소 하나만 알면 전체를 다 복원할 수 있는 군”입니다.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>3. 정수의 덧셈군에서 생성원 보기</h2>
+        <p>
+          가장 대표적인 예시는 \((\mathbb{Z},+)\)입니다.
+          이 군은 \(1\) 하나로 전체를 만들 수 있습니다.
+        </p>
+        <div class="math-box">
+          \[
+          \langle 1 \rangle = \{\dots,-2,-1,0,1,2,\dots\} = \mathbb{Z}
+          \]
+        </div>
+        <p>
+          실제로 \(1\)을 여러 번 더하면 양의 정수가 나오고, 역원을 쓰면 음의 정수도 얻을 수 있습니다.
+        </p>
+        <div class="math-box">
+          \[
+          \langle -1 \rangle = \mathbb{Z}
+          \]
+        </div>
+        <p>
+          따라서 \((\mathbb{Z},+)\)는 순환군입니다. 생성원은 \(1\)과 \(-1\)입니다.
+        </p>
+        <div class="example-box">
+          <strong>디자인 비유:</strong> 1px 이동 버튼 하나만 있다고 해도, 이를 여러 번 누르면 모든 정수 px 이동을 만들 수 있습니다.
+          +1px, -1px 이동이 다 가능하다면 전체 정수 격자를 다 다닐 수 있는 셈입니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>4. \(2\mathbb{Z}\)도 순환군일까?</h2>
+        <p>
+          부분군 \(2\mathbb{Z}\)를 생각해 봅시다.
+        </p>
+        <div class="math-box">
+          \[
+          2\mathbb{Z}=\{\dots,-4,-2,0,2,4,\dots\}
+          \]
+        </div>
+        <p>
+          이 집합도 \(2\) 하나로 생성됩니다.
+        </p>
+        <div class="math-box">
+          \[
+          \langle 2 \rangle = 2\mathbb{Z}
+          \]
+        </div>
+        <p>
+          따라서 \(2\mathbb{Z}\)도 순환군입니다. 마찬가지로 \(-2\)도 생성원입니다.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>5. 나머지군 \(\mathbb{Z}_n\)에서 생성원</h2>
+        <p>
+          원소가 유한한 순환군의 대표 예시는 \(\mathbb{Z}_n\)입니다.
+          예를 들어 \(\mathbb{Z}_6\)에서는 원소가
+        </p>
+        <div class="math-box">
+          \[
+          \{0,1,2,3,4,5\}
+          \]
+        </div>
+        <p>
+          이고 덧셈은 6으로 나눈 나머지끼리 합니다.
+        </p>
+
+        <article class="mini-section">
+          <h3>\(1\)은 생성원이다</h3>
+          <div class="math-box">
+            \[
+            0,\ 1,\ 1+1=2,\ 1+1+1=3,\ 4,\ 5
+            \]
+          </div>
+          <p>
+            결국 모든 원소가 나옵니다. 그래서 \(\langle 1 \rangle = \mathbb{Z}_6\)입니다.
+          </p>
+        </article>
+
+        <article class="mini-section">
+          <h3>\(2\)는 생성원이 아니다</h3>
+          <div class="math-box">
+            \[
+            0,\ 2,\ 4,\ 6\equiv 0 \pmod 6
+            \]
+          </div>
+          <p>
+            계속 반복해도 \(0,2,4\)만 나옵니다. 따라서 \(\langle 2 \rangle\neq \mathbb{Z}_6\)입니다.
+          </p>
+        </article>
+
+        <article class="mini-section">
+          <h3>\(5\)는 생성원이다</h3>
+          <div class="math-box">
+            \[
+            5,\ 10\equiv 4,\ 15\equiv 3,\ 20\equiv 2,\ 25\equiv 1,\ 30\equiv 0 \pmod 6
+            \]
+          </div>
+          <p>
+            모든 원소가 다 나옵니다. 그래서 \(5\)도 생성원입니다.
+          </p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>6. 회전군도 순환군이다</h2>
+        <p>
+          정사각형의 회전만 모은 군
+        </p>
+        <div class="math-box">
+          \[
+          C_4 = \{r_0,r_{90},r_{180},r_{270}\}
+          \]
+        </div>
+        <p>
+          을 생각합시다. 여기서 \(r_{90}\)를 반복하면
+        </p>
+        <div class="math-box">
+          \[
+          r_{90},\ r_{180},\ r_{270},\ r_{360}=r_0
+          \]
+        </div>
+        <p>
+          이 되어 전체가 다 나옵니다. 따라서 \(C_4 = \langle r_{90}\rangle\)입니다.
+        </p>
+        <div class="example-box">
+          <strong>게임 비유:</strong> 캐릭터가 네 방향만 바라볼 수 있고, 버튼 하나가 “오른쪽 90도 회전”이라면,
+          그 버튼 하나만으로 가능한 모든 방향 상태를 다 만들 수 있습니다. 그래서 이 구조는 순환군입니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>7. 모든 군이 순환군은 아니다</h2>
+        <p>
+          순환군은 아주 중요한 군이지만, 모든 군이 순환군인 것은 아닙니다.
+          예를 들어 정사각형의 전체 대칭군은 회전뿐 아니라 반사도 들어 있습니다.
+        </p>
+        <p>
+          그런데 원소 하나만 반복해서는 회전과 반사를 모두 다 만들 수 없습니다.
+          그래서 이런 군은 순환군이 아닙니다.
+        </p>
+        <div class="example-box bad">
+          <strong>핵심:</strong> “원소 하나로 전체가 나오느냐?”가 순환군 판별의 핵심 질문입니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>8. 생성원을 볼 때 자주 하는 실수</h2>
+        <div class="check-grid">
+          <div class="check-item">원소를 몇 번 반복했을 때 멈추는지 안 보기</div>
+          <div class="check-item">역원을 써서 음수 방향도 나오는지 잊기</div>
+          <div class="check-item">나머지 계산을 끝까지 안 하기</div>
+          <div class="check-item">원소 하나로 전체가 안 나와도 일부만 나온다는 점을 놓치기</div>
+        </div>
+        <div class="note-strip">
+          <p>
+            순환군을 볼 때는 “이 원소로 어디까지 갈 수 있지?”를 실제로 차례대로 써 보는 습관이 좋습니다.
+          </p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>9. 연습문제</h2>
+        <p>
+          이번에도 <strong>수학 중심 3문제 + 심화 수학 1문제 + 실생활 응용 1문제</strong>로 구성합니다.
+        </p>
+
+        <div class="exercise">
+          <h3>문제 1. \((\mathbb{Z},+)\)의 생성원</h3>
+          <p>
+            \((\mathbb{Z},+)\)에서 \(1\)과 \(-1\)이 생성원임을 설명하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              \(1\)을 여러 번 더하면 모든 양의 정수가 나오고, 역원을 쓰면 음의 정수도 얻을 수 있습니다.
+              따라서 \(\langle 1\rangle=\mathbb{Z}\)입니다. 마찬가지로 \(-1\)을 반복해도 전체 \(\mathbb{Z}\)를 만들 수 있으므로 \(-1\)도 생성원입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 2. \(\mathbb{Z}_8\)에서 생성원 찾기</h3>
+          <p>
+            \(\mathbb{Z}_8\)에서 \(1\), \(2\), \(4\) 중 생성원인 것을 모두 고르세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              \(1\)은 반복하면 \(0,1,2,3,4,5,6,7\)이 모두 나오므로 생성원입니다.
+              \(2\)는 \(0,2,4,6\)만 나오고, \(4\)는 \(0,4\)만 나옵니다.
+              따라서 생성원은 \(1\)뿐입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 3. 회전군 생성원</h3>
+          <p>
+            \(C_4=\{r_0,r_{90},r_{180},r_{270}\}\)에서 \(r_{180}\)가 생성원인지 판단하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              \(r_{180}\)를 반복하면 \(r_{180}^2=r_0\)이므로 \(r_0\)와 \(r_{180}\)만 나옵니다.
+              전체 원소 4개를 다 만들지 못하므로 생성원이 아닙니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise advanced">
+          <h3>문제 4. 심화 수학</h3>
+          <p>
+            \((\mathbb{Z},+)\)의 부분군 \(n\mathbb{Z}\)를 생각하자. 이 집합이 순환군임을 보이고, 생성원을 모두 구하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              \(n\mathbb{Z}=\{\dots,-2n,-n,0,n,2n,\dots\}\)이므로 \(n\)을 반복해서 전체를 만들 수 있습니다.
+              따라서 \(n\mathbb{Z}=\langle n\rangle\)이고 순환군입니다.
+              또 \(-n\)을 반복해도 같은 집합이 나오므로 생성원은 \(n\)과 \(-n\)입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise application">
+          <h3>문제 5. 실생활 응용</h3>
+          <p>
+            아래 상황 중 하나를 골라, 그것이 “생성원 하나로 전체 상태를 만드는 구조”인지 4~6문장으로 설명하세요.
+          </p>
+          <ul class="clean-list">
+            <li>정사각형 이미지를 90도씩 회전시키는 포토샵 명령</li>
+            <li>보드게임 말의 방향을 한 칸씩 오른쪽으로 돌리는 규칙</li>
+            <li>게임 캐릭터의 시선을 120도씩 회전시키는 규칙</li>
+          </ul>
+          <p>
+            아래 항목을 포함해서 써 보세요.
+          </p>
+          <ul class="clean-list">
+            <li>원소는 무엇인가?</li>
+            <li>하나의 명령을 반복하면 전체 상태가 다 나오는가?</li>
+            <li>만약 다 나오지 않는다면 어떤 상태들만 나오는가?</li>
+          </ul>
+          <details>
+            <summary>예시 해설 보기</summary>
+            <p>
+              예를 들어 정사각형 이미지를 90도씩 회전시키는 명령은 생성원처럼 작동합니다.
+              원소는 가능한 회전 상태 \(0^\circ,90^\circ,180^\circ,270^\circ\)입니다.
+              90도 회전을 반복하면 네 상태가 모두 나오므로 하나의 명령이 전체를 생성합니다.
+              따라서 이 구조는 순환군으로 볼 수 있습니다.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="card accent-card">
+        <h2>오늘의 핵심 한 줄</h2>
+        <p class="big-quote">
+          순환군은 <strong>원소 하나를 반복하는 것만으로 전체가 만들어지는 군</strong>이다.
+        </p>
+      </section>
+
+      <section class="card next-card">
+        <h2>다음 강의</h2>
+        <p>
+          다음 5강에서는 군 준동형을 배웁니다. 서로 다른 군 사이에서 구조를 보존하는 함수가 무엇인지, 그리고 왜 커널과 상(image)이 중요한지 보게 됩니다.
+        </p>
+        <div class="cta-wrap left">
+          <a class="primary-btn" href="chapter5-group-homomorphisms.html">5강으로 가기</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

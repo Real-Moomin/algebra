@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2강. 군의 기본 예시</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], packages: {'[+]': ['ams']} },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="site-shell lesson-shell">
+    <nav class="top-nav">
+      <a href="index.html">← 홈으로</a>
+      <span>1단계 · 군론</span>
+    </nav>
+
+    <header class="lesson-hero">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>군의 기본 예시</h1>
+      <p class="hero-text">
+        1강에서는 군의 네 조건을 배웠습니다. 이번 강의에서는 그 조건이 실제로 어디에서 보이는지 확인합니다.
+        정수의 덧셈군, 행렬군, 대칭군을 보면서 “군은 추상적인 정의”가 아니라 “반복 가능한 조작의 구조”라는 감각을 잡아 봅시다.
+      </p>
+    </header>
+
+    <main class="lesson-main">
+      <section class="card accent-card">
+        <h2>학습 목표</h2>
+        <ul class="clean-list">
+          <li>정수의 덧셈군이 왜 군인지 설명할 수 있다.</li>
+          <li>행렬의 곱셈에서 군이 만들어지는 조건을 이해할 수 있다.</li>
+          <li>대칭군을 “도형의 움직임”으로 상상할 수 있다.</li>
+          <li>같은 군이라도 원소의 모습이 숫자, 행렬, 움직임으로 달라질 수 있음을 이해할 수 있다.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>들어가기 전에...</h2>
+        <p>
+          어떤 디자인 툴에서는 원소가 숫자가 아니라 <strong>변환 명령</strong>일 수 있습니다. 예를 들어 오브젝트를 오른쪽으로 이동시키는 명령, 회전시키는 명령, 뒤집는 명령이 있습니다.
+          게임에서는 캐릭터 방향 전환이나 퍼즐 조작이 원소가 될 수도 있습니다.
+        </p>
+        <p>
+          즉 군의 원소는 꼭 숫자일 필요가 없습니다. <strong>합칠 수 있고, 되돌릴 수 있고, 규칙이 안정적이면</strong> 그것도 군의 후보가 됩니다.
+        </p>
+        <div class="callout info">
+          <strong>핵심 감각:</strong> 군은 “무엇을 원소로 삼느냐”보다 “그 원소들이 어떤 규칙으로 움직이느냐”가 더 중요합니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>1. 먼저 큰 그림 보기</h2>
+        <div class="compare-grid">
+          <div class="compare-card">
+            <h3>정수의 덧셈군</h3>
+            <p>원소: 숫자</p>
+            <p>연산: 더하기</p>
+            <p>감각: 수직선에서 앞뒤로 움직이기</p>
+          </div>
+          <div class="compare-card">
+            <h3>행렬군</h3>
+            <p>원소: 행렬</p>
+            <p>연산: 행렬 곱셈</p>
+            <p>감각: 평면을 변형하는 규칙</p>
+          </div>
+          <div class="compare-card">
+            <h3>대칭군</h3>
+            <p>원소: 도형의 움직임</p>
+            <p>연산: 움직임을 차례로 적용</p>
+            <p>감각: 회전, 뒤집기, 자리 바꾸기</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. 예시 A — 정수의 덧셈군 \( (\mathbb{Z}, +) \)</h2>
+        <p>
+          가장 유명한 예시는 정수 전체 \(\mathbb{Z} = \{\dots,-2,-1,0,1,2,\dots\}\)와 덧셈 \(+\)입니다.
+          이 구조는 군입니다.
+        </p>
+        <div class="math-box">
+          \[
+          (\mathbb{Z}, +) \text{ is a group.}
+          \]
+        </div>
+
+        <article class="mini-section">
+          <h3>왜 군일까?</h3>
+          <ul class="clean-list">
+            <li>닫힘성: 정수 두 개를 더하면 항상 정수입니다.</li>
+            <li>결합법칙: \((a+b)+c = a+(b+c)\)</li>
+            <li>항등원: \(0\)</li>
+            <li>역원: \(a\)의 역원은 \(-a\)</li>
+          </ul>
+        </article>
+
+        <article class="mini-section">
+          <h3>어떻게 상상하면 좋을까?</h3>
+          <p>
+            수직선 위에서 오른쪽으로 3칸, 다시 왼쪽으로 5칸 움직이는 상황을 떠올리면 됩니다.
+            덧셈은 “이동 명령을 합치는 것”처럼 볼 수 있습니다.
+          </p>
+          <div class="example-box">
+            <strong>디자인 비유:</strong> 레이어를 x축으로 \(+20\)px 이동시키고, 다시 \(-8\)px 이동시키면 최종 이동량은 \(+12\)px입니다.
+            이런 “이동량의 합”은 정수나 실수의 덧셈군과 비슷한 감각을 줍니다.
+          </div>
+        </article>
+
+        <article class="mini-section">
+          <h3>왜 뺄셈군이라고 하지 않을까?</h3>
+          <p>
+            \(\mathbb{Z}\)에서 뺄셈은 결합법칙이 성립하지 않습니다.
+          </p>
+          <div class="math-box">
+            \[
+            (7-3)-2 = 2, \qquad 7-(3-2)=6
+            \]
+          </div>
+          <p>
+            그래서 같은 집합 \(\mathbb{Z}\)라도 연산을 무엇으로 잡느냐에 따라 군이 되기도 하고 안 되기도 합니다.
+          </p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>3. 예시 B — 행렬군</h2>
+        <p>
+          이번에는 숫자 대신 행렬을 원소로 생각합니다. 행렬은 숫자를 표처럼 배열한 것입니다.
+          고등학교에서는 보통 \(2 \times 2\) 행렬을 많이 봅니다.
+        </p>
+        <div class="math-box">
+          \[
+          A = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix},
+          \qquad
+          B = \begin{pmatrix} 1 & 0 \\ 3 & 1 \end{pmatrix}
+          \]
+        </div>
+        <p>
+          행렬끼리는 곱셈을 할 수 있습니다. 그리고 이 곱셈은 “평면의 변환을 이어 붙이는 것”으로 해석할 수 있습니다.
+        </p>
+
+        <article class="mini-section">
+          <h3>아무 행렬이나 다 군을 이루지는 않는다</h3>
+          <p>
+            행렬 전체는 곱셈에 대해 군이 아닙니다. 가장 큰 이유는 <strong>역행렬이 없는 행렬</strong>이 있기 때문입니다.
+          </p>
+          <div class="example-box bad">
+            예를 들어 영행렬
+            \[
+            O = \begin{pmatrix}0 & 0 \\ 0 & 0\end{pmatrix}
+            \]
+            은 어떤 행렬을 곱해도 항등행렬
+            \[
+            I = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}
+            \]
+            이 되게 만들 수 없습니다. 즉 역원이 없습니다.
+          </div>
+        </article>
+
+        <article class="mini-section">
+          <h3>그럼 어떤 행렬들이 군을 이룰까?</h3>
+          <p>
+            역행렬이 존재하는 \(2 \times 2\) 행렬들만 모으면 군이 됩니다. 보통 이런 집합을 일반선형군의 한 예로 생각합니다.
+          </p>
+          <ul class="clean-list">
+            <li>닫힘성: 가역행렬 두 개를 곱하면 다시 가역행렬입니다.</li>
+            <li>결합법칙: 행렬 곱셈은 결합법칙을 만족합니다.</li>
+            <li>항등원: \(I = \begin{pmatrix}1&0\\0&1\end{pmatrix}\)</li>
+            <li>역원: 각 가역행렬에는 역행렬 \(A^{-1}\)가 있습니다.</li>
+          </ul>
+        </article>
+
+        <article class="mini-section">
+          <h3>디자인과 연결해 보면</h3>
+          <p>
+            피그마나 포토샵에서 오브젝트에 확대, 축소, 기울이기, 회전 같은 변환을 적용한다고 생각해 봅시다.
+            이런 변환은 행렬로 표현되는 경우가 많습니다.
+          </p>
+          <div class="example-box">
+            <strong>중요한 감각:</strong> “변환을 연달아 적용한다”는 생각은 행렬 곱셈과 아주 가깝습니다.
+            그래서 행렬군은 그래픽스와 UI 변환을 이해할 때도 자주 등장합니다.
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>4. 예시 C — 대칭군</h2>
+        <p>
+          대칭군은 군론의 대표 스타입니다. 도형을 움직였는데 모양이 그대로 보이면, 그 움직임을 대칭이라고 합니다.
+          이런 움직임들을 모아 두면 군이 됩니다.
+        </p>
+
+        <article class="mini-section">
+          <h3>정삼각형을 생각해 보자</h3>
+          <p>
+            정삼각형은 회전도 가능하고 뒤집기도 가능합니다. 그런데 아무렇게나 움직이는 것이 아니라,
+            움직인 뒤에도 정삼각형이 자기 자신과 정확히 겹쳐야 합니다.
+          </p>
+          <p>
+            가능한 움직임은 총 6개입니다.
+          </p>
+          <ul class="clean-list">
+            <li>회전 3개: \(0^\circ, 120^\circ, 240^\circ\)</li>
+            <li>반사 3개: 세 축에 대한 뒤집기</li>
+          </ul>
+        </article>
+
+        <article class="mini-section">
+          <h3>왜 군일까?</h3>
+          <ul class="clean-list">
+            <li>두 대칭을 연달아 적용해도 결과는 다시 대칭입니다.</li>
+            <li>대칭의 합성은 결합법칙을 만족합니다.</li>
+            <li>아무것도 하지 않는 움직임이 항등원입니다.</li>
+            <li>각 대칭에는 되돌리는 반대 움직임이 있습니다.</li>
+          </ul>
+        </article>
+
+        <article class="mini-section">
+          <h3>보드게임과 게임으로 생각하면</h3>
+          <p>
+            보드게임의 말 3개가 삼각형 꼭짓점에 놓여 있다고 생각합시다. 판을 돌리거나 뒤집었을 때 말의 배치가 어떻게 바뀌는지 추적하면,
+            대칭군은 “자리 바꾸기의 구조”로 보입니다.
+          </p>
+          <div class="example-box">
+            <strong>게임 비유:</strong> 퍼즐 조작에서 한 번의 회전 명령, 한 번의 뒤집기 명령을 원소로 보면,
+            대칭군은 “퍼즐 조작의 가능한 모든 안정된 명령 모음”처럼 이해할 수 있습니다.
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>5. 세 예시를 한 줄로 비교하면</h2>
+        <div class="compare-grid">
+          <div class="compare-card">
+            <h3>정수의 덧셈군</h3>
+            <p>눈에 보이는 대상: 숫자</p>
+            <p>되돌리기: 음수 더하기</p>
+            <p>항등원: \(0\)</p>
+          </div>
+          <div class="compare-card">
+            <h3>행렬군</h3>
+            <p>눈에 보이는 대상: 변환 표</p>
+            <p>되돌리기: 역행렬</p>
+            <p>항등원: \(I\)</p>
+          </div>
+          <div class="compare-card">
+            <h3>대칭군</h3>
+            <p>눈에 보이는 대상: 움직임</p>
+            <p>되돌리기: 반대 대칭</p>
+            <p>항등원: 아무것도 안 하기</p>
+          </div>
+        </div>
+        <div class="note-strip">
+          <p>
+            겉모습은 완전히 다르지만, 세 구조는 모두 “합성 가능, 기준점 존재, 되돌리기 가능”이라는 공통 뼈대를 공유합니다.
+            이것이 군론이 강력한 이유입니다.
+          </p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>6. 연습문제</h2>
+        <p>
+          이번에도 <strong>수학 중심 3문제 + 심화 수학 1문제 + 실생활 응용 1문제</strong>로 구성합니다.
+        </p>
+
+        <div class="exercise">
+          <h3>문제 1. 정수의 덧셈군 확인</h3>
+          <p>
+            \((\mathbb{Z}, +)\)가 군인 이유를 네 조건에 맞추어 간단히 쓰세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              정수끼리 더하면 다시 정수이므로 닫힘성이 성립합니다. 덧셈은 결합법칙을 만족합니다. 항등원은 \(0\)이고, 각 정수 \(a\)의 역원은 \(-a\)입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 2. 행렬에서 항등원 찾기</h3>
+          <p>
+            행렬 곱셈에서 항등원 역할을 하는 \(2 \times 2\) 행렬을 쓰고, 왜 항등원인지 설명하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              항등원은
+              \[
+              I = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}
+              \]
+              입니다. 임의의 \(2 \times 2\) 행렬 \(A\)에 대해 \(AI = IA = A\)이므로 항등원입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 3. 대칭군 감각 익히기</h3>
+          <p>
+            정삼각형의 대칭 중 “아무것도 하지 않기”와 “\(120^\circ\) 회전”을 생각합시다.
+            이 둘 중 항등원은 무엇인지 말하고, \(120^\circ\) 회전의 역원은 무엇인지 쓰세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              항등원은 “아무것도 하지 않기”입니다. \(120^\circ\) 회전의 역원은 \(240^\circ\) 회전입니다.
+              두 움직임을 연달아 하면 전체적으로 \(360^\circ\), 즉 원래 상태로 돌아옵니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise advanced">
+          <h3>문제 4. 심화 수학</h3>
+          <p>
+            집합
+            \[
+            G = \left\{ \begin{pmatrix}1&0\\0&1\end{pmatrix}, \begin{pmatrix}-1&0\\0&-1\end{pmatrix} \right\}
+            \]
+            를 생각합시다. 연산은 행렬 곱셈입니다. 이 구조가 군인지 판단하고, 이유를 설명하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              군입니다. 두 행렬을 곱하면 다시 이 둘 중 하나가 나오므로 닫힘성이 있습니다.
+              행렬 곱셈은 결합법칙을 만족합니다. 항등원은 \(I\)입니다.
+              또한 \(-I\)의 역원은 자기 자신입니다. 왜냐하면 \((-I)(-I)=I\)이기 때문입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise application">
+          <h3>문제 5. 실생활 응용</h3>
+          <p>
+            디자인 툴의 오브젝트 회전, 게임 캐릭터 방향 전환, 보드게임 말의 자리 바꾸기 중 하나를 골라 보세요.
+            그 상황을 군처럼 볼 수 있는지 아래 항목에 맞추어 짧게 서술하세요.
+          </p>
+          <ul class="clean-list">
+            <li>원소를 무엇으로 잡을 것인가?</li>
+            <li>연산을 무엇으로 잡을 것인가?</li>
+            <li>항등원은 무엇인가?</li>
+            <li>모든 원소에 역원이 있는가?</li>
+          </ul>
+          <details>
+            <summary>예시 해설 보기</summary>
+            <p>
+              예를 들어 정사각형 스프라이트의 회전 명령만 모으면 군처럼 볼 수 있습니다.
+              원소는 \(0^\circ,90^\circ,180^\circ,270^\circ\) 회전이고, 연산은 명령의 합성입니다.
+              항등원은 \(0^\circ\) 회전이며, 각 회전은 반대 방향 회전으로 되돌릴 수 있습니다.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="card accent-card">
+        <h2>오늘의 핵심 한 줄</h2>
+        <p class="big-quote">
+          군의 원소는 숫자일 수도 있고, 행렬일 수도 있고, 도형의 움직임일 수도 있다. 중요한 것은 <strong>겉모습이 아니라 구조</strong>다.
+        </p>
+      </section>
+
+      <section class="card next-card">
+        <h2>다음 강의</h2>
+        <p>
+          다음 3강에서는 부분군을 배웁니다. 큰 군 안에서 작은 군이 어떻게 숨어 있는지 보게 됩니다.
+        </p>
+        <div class="cta-wrap left">
+          <a class="primary-btn" href="chapter3-subgroups.html">3강으로 가기</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

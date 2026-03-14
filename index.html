@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>현대대수학 공부 - 홈</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)'], ['$', '$']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="hero">
+      <p class="eyebrow">Modern Algebra for Beginners</p>
+      <h1>현대대수학 공부</h1>
+      <p class="hero-text">
+        디자이너도 이해할 수 있도록, 쉬운 설명으로 차근차근 배우는 현대대수학 학습 사이트입니다.
+        설명은 쉽게 하지만, 예시는 필요할 때 방정식, 행렬, 함수처럼 고등학교 수준 소재까지 적극적으로 사용합니다. 또 게임 조작, 이미지 편집, RGB 같은 디자인 친화적 예시도 함께 사용합니다.
+      </p>
+      <div class="hero-tags">
+        <span>뉴트럴 다크모드</span>
+        <span>모바일 친화</span>
+        <span>챕터별 HTML 분리</span>
+        <span>LaTeX 수식 표기</span>
+      </div>
+    </header>
+
+    <main class="layout two-col">
+      <section class="card">
+        <h2>이 사이트의 학습 흐름</h2>
+        <p>
+          현대대수학은 “계산을 많이 하는 수학”이라기보다, <strong>규칙이 있는 구조를 이해하는 학문</strong>에 가깝습니다.
+          그래서 먼저 군(Group)부터 시작해서, 그다음 환(Ring), 체(Field), 갈루아 이론, 모듈, 범주론으로 확장합니다.
+        </p>
+        <div class="roadmap">
+          <div class="roadmap-item active">
+            <h3>1단계. 군론</h3>
+            <p>규칙 있는 움직임, 대칭, 조작의 세계</p>
+          </div>
+          <div class="roadmap-item">
+            <h3>2단계. 환론</h3>
+            <p>더하기와 곱하기가 함께 있는 구조</p>
+          </div>
+          <div class="roadmap-item">
+            <h3>3단계. 체론</h3>
+            <p>나눗셈까지 가능한 좋은 구조</p>
+          </div>
+          <div class="roadmap-item">
+            <h3>4단계. 갈루아 이론</h3>
+            <p>방정식과 대칭의 깊은 연결</p>
+          </div>
+          <div class="roadmap-item">
+            <h3>5단계. 모듈 이론</h3>
+            <p>벡터공간을 더 넓게 바라보기</p>
+          </div>
+          <div class="roadmap-item">
+            <h3>6단계. 범주론 맛보기</h3>
+            <p>수학 전체를 보는 높은 시야</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>현재 열린 강의</h2>
+        <div class="lesson-list">
+          <a class="lesson-link current" href="chapter1-group-definition.html">
+            <span class="lesson-number">1강</span>
+            <div>
+              <strong>군의 정의</strong>
+              <p>closure, associativity, identity, inverse</p>
+            </div>
+          </a>
+          <a class="lesson-link current" href="chapter2-basic-examples.html">
+            <span class="lesson-number">2강</span>
+            <div>
+              <strong>군의 기본 예시</strong>
+              <p>정수의 덧셈군, 행렬군, 대칭군</p>
+            </div>
+          </a>
+          <a class="lesson-link current" href="chapter3-subgroups.html">
+            <span class="lesson-number">3강</span>
+            <div>
+              <strong>부분군</strong>
+              <p>큰 규칙 안의 작은 규칙</p>
+            </div>
+          </a>
+          <a class="lesson-link current" href="chapter4-generators-cyclic-groups.html">
+            <span class="lesson-number">4강</span>
+            <div>
+              <strong>생성원과 순환군</strong>
+              <p>하나의 씨앗으로 전체 만들기</p>
+            </div>
+          </a>
+          <a class="lesson-link current" href="chapter5-group-homomorphisms.html">
+            <span class="lesson-number">5강</span>
+            <div>
+              <strong>군 준동형</strong>
+              <p>구조를 보존하는 함수</p>
+            </div>
+          </a>
+        </div>
+      </aside>
+    </main>
+
+    <section class="card">
+      <h2>왜 군론부터 시작할까?</h2>
+      <p>
+        군론은 현대대수학의 가장 기본 뼈대입니다. 버튼을 누르는 순서, 퍼즐을 돌리는 방법,
+        도형을 뒤집거나 회전시키는 규칙처럼, <strong>“행동”과 “조작”의 구조</strong>를 다룹니다.
+      </p>
+      <p>
+        즉, 숫자 계산보다도 “이 행동들을 묶어 보면 어떤 공통 규칙이 있지?”를 보는 학문입니다.
+        그래서 디자인, 인터랙션, 시스템 사고와도 의외로 닿아 있습니다.
+      </p>
+      <div class="cta-wrap">
+        <a class="primary-btn" href="chapter1-group-definition.html">1강 보기</a>
+      </div>
+      <div class="cta-wrap" style="margin-top:12px; gap:12px;">
+        <a class="ghost-btn" href="chapter1-group-definition.html">1강 보기</a>
+        <a class="primary-btn" href="chapter5-group-homomorphisms.html">5강 시작하기</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

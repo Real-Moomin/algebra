@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3강. 부분군</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], packages: {'[+]': ['ams']} },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="site-shell lesson-shell">
+    <nav class="top-nav">
+      <a href="index.html">← 홈으로</a>
+      <span>1단계 · 군론</span>
+    </nav>
+
+    <header class="lesson-hero">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>부분군</h1>
+      <p class="hero-text">
+        큰 군 안에는 종종 더 작은 군이 숨어 있습니다. 이 작은 군을 <strong>부분군</strong>이라고 합니다.
+        이번 강의에서는 “전체 규칙 속의 작은 규칙”이라는 감각으로 부분군을 배우고,
+        실제로 어떤 집합이 부분군인지 판별하는 연습을 합니다.
+      </p>
+    </header>
+
+    <main class="lesson-main">
+      <section class="card accent-card">
+        <h2>학습 목표</h2>
+        <ul class="clean-list">
+          <li>부분군의 뜻을 말할 수 있다.</li>
+          <li>큰 군 안에서 작은 군이 되려면 무엇이 필요한지 설명할 수 있다.</li>
+          <li>부분군 판별에 필요한 핵심 조건을 사용할 수 있다.</li>
+          <li>정수군, 행렬군, 대칭군 안에서 부분군 예시를 찾을 수 있다.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>들어가기 전에...</h2>
+        <p>
+          게임 전체 조작이 20개 있다고 해 봅시다. 그런데 그중에서 “이동 관련 조작만” 따로 모아도,
+          여전히 조작을 이어 붙일 수 있고 되돌릴 수도 있다면 그 작은 조작 모음은 하나의 완결된 시스템처럼 보일 수 있습니다.
+        </p>
+        <p>
+          디자인 툴도 비슷합니다. 전체 변환 기능은 많지만, 그중에서 <strong>회전만</strong> 모아도 하나의 닫힌 규칙이 될 수 있습니다.
+          이런 식으로 큰 구조 안에서 독립적으로 잘 돌아가는 작은 구조를 수학에서는 부분군이라고 부릅니다.
+        </p>
+        <div class="callout info">
+          <strong>핵심 감각:</strong> 부분군은 “큰 세계 안에 숨어 있는 작은 세계”입니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>1. 부분군이란?</h2>
+        <p>
+          군 \((G,\ast)\)의 부분집합 \(H \subseteq G\)가, 같은 연산 \(\ast\)에 대해 스스로도 군이 되면 \(H\)를 \(G\)의 <strong>부분군</strong>이라고 합니다.
+        </p>
+        <div class="math-box">
+          \[
+          H \leq G \quad \text{means: } H \text{ is a subgroup of } G.
+          \]
+        </div>
+        <p>
+          여기서 중요한 점은 <strong>연산을 새로 만드는 것이 아니라</strong>, 원래 \(G\)에서 쓰던 연산을 그대로 쓴다는 것입니다.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>2. 왜 그냥 부분집합이면 안 될까?</h2>
+        <p>
+          \(G\)의 원소 몇 개를 골라 모아 놓는다고 해서 자동으로 부분군이 되는 것은 아닙니다.
+          그 안에서 연산했을 때 결과가 자꾸 밖으로 튀어나가면, 그 집합만으로는 독립된 군이 될 수 없습니다.
+        </p>
+        <div class="example-box bad">
+          예를 들어 \((\mathbb{Z},+)\)에서 \(H=\{1,2,3\}\)를 생각해 봅시다.
+          그런데 \(2+3=5\)이고, \(5\notin H\)입니다. 따라서 닫힘성이 깨집니다.
+          그래서 \(H\)는 부분군이 아닙니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3. 부분군 판별의 기본 아이디어</h2>
+        <p>
+          정의대로라면 항등원, 역원, 결합법칙, 닫힘성을 모두 확인해야 합니다. 하지만 실제 계산에서는 더 간단한 판별법을 자주 씁니다.
+        </p>
+
+        <article class="mini-section">
+          <h3>방법 A — 정의대로 확인하기</h3>
+          <ul class="clean-list">
+            <li>\(H\) 안에서 연산 결과가 다시 \(H\) 안에 있는가?</li>
+            <li>항등원이 \(H\) 안에 있는가?</li>
+            <li>각 원소의 역원이 \(H\) 안에 있는가?</li>
+          </ul>
+          <p>
+            결합법칙은 \(G\)에서 이미 성립하므로, 같은 연산을 쓰는 \(H\)에서도 자동으로 성립합니다.
+          </p>
+        </article>
+
+        <article class="mini-section">
+          <h3>방법 B — 부분군 판별법</h3>
+          <p>
+            \(H\neq \varnothing\)일 때, 모든 \(a,b\in H\)에 대해
+          </p>
+          <div class="math-box">
+            \[
+            ab^{-1} \in H
+            \]
+          </div>
+          <p>
+            가 성립하면 \(H\)는 부분군입니다. 연산 기호가 곱셈형이 아니라면 그에 맞게 해석하면 됩니다.
+          </p>
+          <div class="callout warn">
+            \((\mathbb{Z},+)\)에서는 \(ab^{-1}\) 대신 \(a-b\)로 생각하면 됩니다.
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>4. 예시 A — 짝수 전체는 부분군일까?</h2>
+        <p>
+          \((\mathbb{Z},+)\) 안에서 짝수 전체의 집합
+        </p>
+        <div class="math-box">
+          \[
+          2\mathbb{Z}=\{\dots,-4,-2,0,2,4,\dots\}
+          \]
+        </div>
+        <p>
+          을 생각해 봅시다. 이것은 부분군입니다.
+        </p>
+        <ul class="clean-list">
+          <li>짝수 + 짝수 = 짝수</li>
+          <li>항등원 \(0\)은 짝수</li>
+          <li>짝수의 반대수도 짝수</li>
+        </ul>
+        <div class="example-box">
+          <strong>디자인 비유:</strong> x축으로 2px 단위로만 움직이는 스냅 시스템을 생각해 보세요.
+          2px, 4px, -6px 같은 이동만 허용하면, 그런 이동량들은 서로 더해도 다시 2px 단위 이동이 됩니다.
+          그래서 하나의 안정된 작은 세계처럼 보입니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>5. 예시 B — 자연수는 부분군일까?</h2>
+        <p>
+          이번에는 \((\mathbb{Z},+)\) 안에서 자연수 \(\mathbb{N}\)를 생각해 봅시다.
+        </p>
+        <p>
+          얼핏 보면 더하기에 대해 닫혀 있으니 될 것 같지만, 부분군은 아닙니다.
+        </p>
+        <ul class="clean-list">
+          <li>보통 \(-3\)은 자연수가 아니므로 역원이 없습니다.</li>
+          <li>정의에 따라 \(0\notin \mathbb{N}\)로 두는 경우 항등원도 없습니다.</li>
+        </ul>
+        <div class="example-box bad">
+          앞으로는 “닫혀 있네?”에서 멈추지 말고, <strong>항등원과 역원까지 있는지</strong> 꼭 봐야 합니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>6. 예시 C — 회전만 모으면 부분군이 된다</h2>
+        <p>
+          정사각형의 모든 대칭은 회전과 반사를 포함합니다. 이 전체 집합은 하나의 군입니다.
+          그런데 여기서 <strong>회전만</strong> 뽑아 보겠습니다.
+        </p>
+        <div class="math-box">
+          \[
+          H = \{r_0, r_{90}, r_{180}, r_{270}\}
+          \]
+        </div>
+        <p>
+          여기서 \(r_{90}\)는 90도 회전을 뜻합니다. 이 집합은 부분군입니다.
+        </p>
+        <ul class="clean-list">
+          <li>회전을 두 번 합치면 다시 회전입니다.</li>
+          <li>항등원은 \(r_0\)입니다.</li>
+          <li>\(r_{90}\)의 역원은 \(r_{270}\)입니다.</li>
+        </ul>
+        <div class="example-box">
+          <strong>게임 비유:</strong> 캐릭터가 북, 동, 남, 서 네 방향만 바라본다고 합시다.
+          “오른쪽으로 90도 돌기”만 반복하는 조작 집합은 작은 군이 됩니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>7. 예시 D — 행렬군 안의 부분군</h2>
+        <p>
+          행렬군 안에서도 부분군을 찾을 수 있습니다. 예를 들어
+        </p>
+        <div class="math-box">
+          \[
+          H = \left\{
+          \begin{pmatrix}1&0\\0&1\end{pmatrix},
+          \begin{pmatrix}-1&0\\0&-1\end{pmatrix}
+          \right\}
+          \]
+        </div>
+        <p>
+          는 가역행렬들의 군 안에서 부분군입니다.
+        </p>
+        <ul class="clean-list">
+          <li>두 행렬을 곱하면 다시 \(I\) 또는 \(-I\)가 나옵니다.</li>
+          <li>항등원 \(I\)가 들어 있습니다.</li>
+          <li>\(-I\)의 역원은 자기 자신입니다.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>8. 부분군을 볼 때 자주 하는 실수</h2>
+        <div class="check-grid">
+          <div class="check-item">닫힘성만 보고 끝내기</div>
+          <div class="check-item">항등원이 들어 있는지 잊기</div>
+          <div class="check-item">역원이 같은 집합 안에 있는지 안 보기</div>
+          <div class="check-item">원래 군의 연산이 무엇인지 놓치기</div>
+        </div>
+        <div class="note-strip">
+          <p>
+            특히 “같은 집합이라도 연산이 다르면 결과가 달라진다”는 점을 계속 의식해야 합니다.
+          </p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>9. 연습문제</h2>
+        <p>
+          이번에도 <strong>수학 중심 3문제 + 심화 수학 1문제 + 실생활 응용 1문제</strong>로 구성합니다.
+        </p>
+
+        <div class="exercise">
+          <h3>문제 1. 짝수 부분군 확인</h3>
+          <p>
+            \((\mathbb{Z},+)\)에서 \(2\mathbb{Z}\)가 부분군임을 세 가지 조건으로 확인하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              짝수 두 개를 더하면 다시 짝수이므로 닫힘성이 있습니다. \(0\in 2\mathbb{Z}\)이므로 항등원이 들어 있습니다.
+              또한 \(2k\)의 역원은 \(-2k\)이고 이것도 짝수입니다. 따라서 부분군입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 2. \(\{0,3,6,9,\dots\}\)는 부분군일까?</h3>
+          <p>
+            \((\mathbb{Z},+)\) 안에서 3의 배수 전체의 집합이 부분군인지 판단하고 이유를 쓰세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              부분군입니다. 3의 배수끼리 더하면 다시 3의 배수이고, \(0\)이 포함되며, \(3k\)의 역원 \(-3k\)도 3의 배수이기 때문입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 3. 자연수 집합 판별</h3>
+          <p>
+            \((\mathbb{Z},+)\) 안에서 자연수 집합 \(\mathbb{N}\)이 부분군이 아닌 이유를 두 가지 쓰세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              음의 정수가 들어 있지 않아 역원이 없습니다. 또 정의에 따라 \(0\notin\mathbb{N}\)인 경우 항등원도 없습니다.
+              따라서 부분군이 아닙니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise advanced">
+          <h3>문제 4. 심화 수학</h3>
+          <p>
+            \((\mathbb{Z},+)\)의 부분집합
+          </p>
+          <div class="math-box">
+            \[
+            H = \{a-b \mid a,b \in 5\mathbb{Z}\}
+            \]
+          </div>
+          <p>
+            를 생각하자. \(H\)를 더 간단한 집합으로 나타내고, 이것이 \((\mathbb{Z},+)\)의 부분군인지 설명하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              \(a,b\)가 모두 5의 배수이면 \(a-b\)도 5의 배수입니다. 반대로 모든 5의 배수는 \(5k = 5k-0\) 꼴로 쓸 수 있습니다.
+              따라서 \(H=5\mathbb{Z}\)입니다. 이미 5의 배수 전체는 \((\mathbb{Z},+)\)의 부분군입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise application">
+          <h3>문제 5. 실생활 응용</h3>
+          <p>
+            다음 중 하나를 골라, 그것이 “큰 군 안의 부분군”처럼 보이는지 서술하세요.
+          </p>
+          <ul class="clean-list">
+            <li>디자인 툴의 전체 변환 중 회전만 모은 집합</li>
+            <li>보드게임 말의 전체 이동 중 좌우 이동만 모은 집합</li>
+            <li>게임 캐릭터 조작 중 방향 회전 명령만 모은 집합</li>
+          </ul>
+          <p>
+            아래 네 항목을 포함해서 4~6문장 정도로 설명해 보세요.
+          </p>
+          <ul class="clean-list">
+            <li>큰 군의 원소는 무엇인가?</li>
+            <li>작은 집합의 원소는 무엇인가?</li>
+            <li>닫힘성이 있는가?</li>
+            <li>항등원과 역원이 있는가?</li>
+          </ul>
+          <details>
+            <summary>예시 해설 보기</summary>
+            <p>
+              예를 들어 정사각형 이미지의 전체 대칭을 큰 군으로 보면, 회전만 모은 집합은 부분군입니다.
+              회전을 두 번 합치면 다시 회전이므로 닫혀 있습니다. 항등원은 0도 회전입니다.
+              각 회전은 반대 방향 회전으로 되돌릴 수 있으므로 역원도 있습니다. 따라서 큰 대칭군 안의 부분군으로 볼 수 있습니다.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="card accent-card">
+        <h2>오늘의 핵심 한 줄</h2>
+        <p class="big-quote">
+          부분군은 큰 군의 일부이지만, 그 안에서도 <strong>스스로 완결된 규칙</strong>을 가진 작은 군이다.
+        </p>
+      </section>
+
+      <section class="card next-card">
+        <h2>다음 강의</h2>
+        <p>
+          다음 4강에서는 생성원과 순환군을 배웁니다. 하나의 원소를 반복해서 전체를 만들어 내는 구조를 보게 됩니다.
+        </p>
+        <div class="cta-wrap left">
+          <a class="primary-btn" href="chapter4-generators-cyclic-groups.html">4강으로 가기</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
