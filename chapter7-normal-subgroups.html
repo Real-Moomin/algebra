@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7강. 정규부분군</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(","\\)"], ["$","$"]],
+        displayMath: [["\\[","\\]"], ["$$","$$"]],
+        processEscapes: true,
+        packages: {'[+]': ['ams']}
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="site-shell lesson-shell">
+    <nav class="top-nav">
+      <a href="index.html">← 홈으로</a>
+      <span>1단계 · 군론</span>
+    </nav>
+
+    <header class="lesson-hero">
+      <p class="eyebrow">Lesson 7</p>
+      <h1>정규부분군</h1>
+      <p class="hero-text">
+        정규부분군은 부분군 가운데서도 <strong>군 전체와 잘 어울리는 특별한 부분군</strong>입니다.
+        6강에서 몫군을 만들 때 왜 아무 부분군이나 쓰면 안 되는지 봤다면,
+        이번에는 정확히 어떤 조건이 있어야 안정적으로 묶을 수 있는지를 배웁니다.
+        핵심은 <strong>왼쪽에서 보나 오른쪽에서 보나 같은 부류가 나와야 한다</strong>는 점입니다.
+      </p>
+    </header>
+
+    <main class="lesson-main">
+      <section class="card accent-card">
+        <h2>학습 목표</h2>
+        <ul class="clean-list">
+          <li>정규부분군의 정의를 읽고 설명할 수 있다.</li>
+          <li>
+            \(N \trianglelefteq G\) 표기의 뜻을 안다.
+          </li>
+          <li>왼쪽 잉여류와 오른쪽 잉여류의 차이를 말할 수 있다.</li>
+          <li>왜 정규부분군일 때만 몫군 \(G/N\)의 연산이 잘 정의되는지 감각적으로 설명할 수 있다.</li>
+          <li>아벨군에서는 모든 부분군이 정규부분군임을 이해할 수 있다.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>들어가기 전에...</h2>
+        <p>
+          폴더를 분류한다고 생각해 봅시다. 어떤 파일 묶음은 어디에 놓아도 같은 기준으로 잘 묶이지만,
+          어떤 묶음은 위치를 바꾸는 순간 분류 기준이 흔들립니다.
+          정규부분군은 바로 <strong>위치를 바꾸어도 내부 규칙이 흐트러지지 않는 부분군</strong>입니다.
+        </p>
+        <p>
+          게임으로 말하면, 어떤 기술 조합은 캐릭터 상태를 바꾸어도 같은 종류의 기술 집합으로 남지만,
+          어떤 조합은 상태에 따라 의미가 달라져 버립니다. 몫군을 만들려면 전자처럼 안정적인 부분군이 필요합니다.
+        </p>
+        <div class="callout info">
+          <strong>핵심 감각:</strong> 정규부분군은 “군 전체가 그 부분군을 밀고 당겨도 모양이 유지되는 부분군”이다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>1. 정규부분군의 정의</h2>
+        <p>
+          군 \(G\)의 부분군 \(N\)이 다음 조건을 만족하면 \(N\)을 <strong>정규부분군</strong>이라고 합니다.
+        </p>
+        <div class="math-box">
+          \[
+          gN = Ng \quad \text{for every } g \in G
+          \]
+        </div>
+        <p>
+          즉, 왼쪽에서 \(g\)를 곱해 만든 잉여류와 오른쪽에서 \(g\)를 곱해 만든 잉여류가 항상 같아야 합니다.
+        </p>
+        <div class="math-box">
+          \[
+          N \trianglelefteq G
+          \]
+        </div>
+        <p>
+          이 기호는 “\(N\)은 \(G\)의 정규부분군이다”라는 뜻입니다.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>2. 왼쪽 잉여류와 오른쪽 잉여류</h2>
+        <p>
+          부분군 \(N\)과 원소 \(g \in G\)가 있을 때,
+        </p>
+        <div class="math-box">
+          \[
+          gN = \{gn \mid n \in N\}, \qquad Ng = \{ng \mid n \in N\}
+          \]
+        </div>
+        <p>
+          을 생각할 수 있습니다. 군이 가환이면 \(gn = ng\)이므로 두 집합이 항상 같습니다.
+          하지만 군이 비가환이면 두 집합이 달라질 수 있습니다.
+        </p>
+        <div class="example-box">
+          <strong>중요:</strong> 왼쪽 잉여류와 오른쪽 잉여류가 다르면,
+          “부류끼리 곱하기”라는 규칙이 대표원 선택에 따라 달라질 위험이 생깁니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3. 같은 뜻의 다른 조건</h2>
+        <p>
+          정규부분군 조건은 다음과 같이도 쓸 수 있습니다.
+        </p>
+        <div class="math-box">
+          \[
+          gNg^{-1} = N \quad \text{for every } g \in G
+          \]
+        </div>
+        <p>
+          이 식은 \(N\) 안의 원소를 군 전체의 원소 \(g\)로 앞뒤에서 감싸도 다시 \(N\) 안에 남는다는 뜻입니다.
+          즉, 군 전체가 \(N\)을 “흔들어도” \(N\)의 모양이 바뀌지 않습니다.
+        </p>
+        <div class="callout warn">
+          <strong>읽는 법:</strong> \(gNg^{-1}\)는 \(\{gng^{-1} \mid n \in N\}\)라는 집합을 뜻합니다.
+          원소 하나가 아니라, \(N\) 전체를 통째로 바꾼 것입니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>4. 왜 몫군에 꼭 필요한가?</h2>
+        <p>
+          몫군 \(G/N\)에서는 잉여류끼리 다음처럼 곱하고 싶습니다.
+        </p>
+        <div class="math-box">
+          \[
+          (aN)(bN) = (ab)N
+          \]
+        </div>
+        <p>
+          그런데 \(aN\) 안에서 대표를 \(a'\)로 바꾸고, \(bN\) 안에서 대표를 \(b'\)로 바꾸어도
+          결과가 같은 잉여류가 되어야 이 정의가 안전합니다.
+          바로 그 안전성을 보장하는 조건이 정규부분군입니다.
+        </p>
+        <div class="example-box">
+          <strong>디자인 비유:</strong> 레이어를 그룹으로 묶었다고 합시다.
+          어떤 그룹은 이동, 회전, 정렬을 해도 여전히 같은 규칙으로 묶여 있습니다.
+          하지만 어떤 그룹은 조작 순서에 따라 내부 관계가 바뀌어 버립니다.
+          몫군은 첫 번째처럼 “묶는 기준이 조작 후에도 유지되는 경우”에만 안정적으로 만들 수 있습니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>5. 가장 쉬운 중요한 사실: 아벨군에서는 전부 정규부분군</h2>
+        <p>
+          군 \(G\)가 아벨군이라면 모든 원소가 서로 교환됩니다.
+        </p>
+        <div class="math-box">
+          \[
+          ab = ba \quad \text{for all } a,b \in G
+          \]
+        </div>
+        <p>
+          그래서 임의의 부분군 \(N\)과 임의의 \(g \in G\)에 대해
+        </p>
+        <div class="math-box">
+          \[
+          gN = Ng
+          \]
+        </div>
+        <p>
+          가 자동으로 성립합니다. 따라서 아벨군에서는 <strong>모든 부분군이 정규부분군</strong>입니다.
+        </p>
+        <div class="example-box">
+          <strong>예시:</strong> \((\mathbb{Z},+)\)는 아벨군이므로,
+          \(2\mathbb{Z}\), \(3\mathbb{Z}\), \(10\mathbb{Z}\) 같은 부분군은 모두 정규부분군입니다.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>6. 비가환군에서는 아무 부분군이나 안 된다</h2>
+        <p>
+          대칭군처럼 비가환인 군에서는 어떤 부분군은 정규이고, 어떤 부분군은 정규가 아닙니다.
+          그래서 비가환군에서는 정규부분군이 특히 중요합니다.
+        </p>
+        <div class="example-box bad">
+          <strong>감각만 먼저:</strong> 정사각형의 대칭을 모은 군에서는
+          회전만 모은 부분군은 정규부분군이지만,
+          특정한 반사 하나만으로 만든 부분군은 보통 정규가 아닙니다.
+          왜냐하면 전체 대칭으로 위치를 바꾸면 같은 반사축이 유지되지 않기 때문입니다.
+        </div>
+        <p>
+          이 부분은 뒤에서 군의 작용과 대칭군을 더 배우면 훨씬 선명하게 보입니다.
+          지금은 “비가환군에서는 정규성 검사가 필요하다”는 사실을 잡으면 충분합니다.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>연습문제</h2>
+
+        <div class="exercise">
+          <h3>문제 1. 수학 중심</h3>
+          <p>
+            다음 문장을 참 또는 거짓으로 판단하세요.
+          </p>
+          <ul class="clean-list">
+            <li>모든 정규부분군은 부분군이다.</li>
+            <li>모든 부분군은 정규부분군이다.</li>
+            <li>아벨군에서는 모든 부분군이 정규부분군이다.</li>
+          </ul>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              첫째는 참입니다. 정규부분군은 부분군 중 특별한 경우입니다.
+              둘째는 거짓입니다. 비가환군에서는 정규가 아닌 부분군이 존재합니다.
+              셋째는 참입니다. 아벨군에서는 항상 \(gN=Ng\)가 됩니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 2. 수학 중심</h3>
+          <p>
+            \((\mathbb{Z},+)\)의 부분군 \(N=5\mathbb{Z}\)가 정규부분군인지 설명하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              \((\mathbb{Z},+)\)는 아벨군입니다. 따라서 모든 부분군이 정규부분군입니다.
+              특히 \(5\mathbb{Z}\)도 정규부분군입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise">
+          <h3>문제 3. 수학 중심</h3>
+          <p>
+            정규부분군의 정의 \(gN=Ng\)를 말로 풀어 쓰세요. 2~3문장으로 설명하면 됩니다.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              군의 원소 \(g\)를 왼쪽에서 곱해 만든 잉여류와 오른쪽에서 곱해 만든 잉여류가 항상 같다는 뜻입니다.
+              즉, 군 전체의 원소로 \(N\)을 움직여도 묶이는 방식이 왼쪽과 오른쪽에서 충돌하지 않는다는 말입니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise advanced">
+          <h3>문제 4. 심화 수학</h3>
+          <p>
+            왜 정규부분군이 아니면 \((aN)(bN)=(ab)N\)라는 규칙이 위험해질 수 있는지 4~6문장으로 설명하세요.
+          </p>
+          <details>
+            <summary>해설 보기</summary>
+            <p>
+              몫군에서는 원소 하나가 아니라 잉여류 전체를 원소처럼 다룹니다.
+              따라서 대표원을 바꾸어도 계산 결과가 같은 잉여류가 되어야 합니다.
+              그런데 정규부분군이 아니면 왼쪽 잉여류와 오른쪽 잉여류가 어긋날 수 있어서,
+              대표원을 어떻게 고르느냐에 따라 결과 부류가 달라질 위험이 생깁니다.
+              그래서 몫군의 곱셈이 잘 정의되려면 정규성이 필요합니다.
+            </p>
+          </details>
+        </div>
+
+        <div class="exercise application">
+          <h3>문제 5. 실생활 응용</h3>
+          <p>
+            다음 상황을 정규부분군의 감각과 연결해 4~6문장으로 설명하세요.
+          </p>
+          <ul class="clean-list">
+            <li>디자인 시스템에서 어떤 컴포넌트 묶음은 테마를 바꾸어도 내부 규칙이 유지된다.</li>
+            <li>반면 어떤 임시 묶음은 배치를 바꾸면 같은 그룹으로 보기 어려워진다.</li>
+          </ul>
+          <p>
+            아래 질문을 포함해 써 보세요.
+          </p>
+          <ul class="clean-list">
+            <li>어떤 묶음이 더 “정규부분군 같은”가?</li>
+            <li>왜 안정적인 묶음이 새 구조를 만들 때 유리한가?</li>
+          </ul>
+          <details>
+            <summary>예시 해설 보기</summary>
+            <p>
+              테마를 바꾸거나 위치를 옮겨도 내부 규칙이 유지되는 컴포넌트 묶음이 더 정규부분군 같은 묶음입니다.
+              이런 묶음은 바깥 조작을 받아도 정체성이 무너지지 않습니다.
+              반대로 임시 묶음은 바깥 조건이 바뀌면 그룹 의미가 흔들립니다.
+              몫군은 안정적으로 묶인 부류를 새로운 원소처럼 다루는 개념이므로,
+              이런 “흔들리지 않는 묶음”이 훨씬 잘 맞습니다.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="card accent-card">
+        <h2>오늘의 핵심 한 줄</h2>
+        <p class="big-quote">
+          정규부분군은 <strong>왼쪽으로 보나 오른쪽으로 보나 같은 부류가 되는, 몫군을 만들 수 있는 부분군</strong>이다.
+        </p>
+      </section>
+
+      <section class="card next-card">
+        <h2>다음 강의</h2>
+        <p>
+          다음 8강에서는 군 동형정리, 그중에서도 가장 중요한 첫 번째 동형정리를 배웁니다.
+          커널과 상이 어떻게 군 구조를 압축해서 연결하는지 한 번에 정리됩니다.
+        </p>
+        <div class="cta-wrap left">
+          <span class="ghost-btn disabled">8강은 다음 단계에서 제작</span>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
